@@ -91,6 +91,11 @@ h1 {
     margin-bottom: 10px;
 }
 
+.timer {
+    display: inline;
+    margin-left: 55px;
+}
+
 .score-panel .stars {
     margin: 0;
     padding: 0;
@@ -106,4 +111,18 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.winning-message {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #0fff 0%, #ccc 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
 }
