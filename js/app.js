@@ -171,7 +171,7 @@ const winGame = () => {
                 minutes ${document.getElementById('seconds').innerHTML}
                 seconds with ${moveCount} moves and
                 ${document.querySelectorAll('.fa-star').length} stars</h2>
-                <button onclick='newCardsSet()'>RESET</button>
+                <button onclick='newCardsSet()'>New Game</button>
             </div>`;
         deck.innerHTML = winningMessage;
     }
