@@ -6,6 +6,7 @@ let count = 0;
 let moveCount = 0;
 let tempArray = [];
 let matchedCards = [];
+let isTimerActive = false;
 
 
 
@@ -105,23 +106,20 @@ let sec = 0;
 
 const pad = (val) => {return val > 9 ? val : "0" + val;}
 
-setInterval(() => {
+const deckCards = document.querySelectorAll('.card')
+
+function startTimer() {
+
+    isTimerActive = true;
+
+    setInterval(() => {
     document.getElementById("seconds").innerHTML=pad(++sec%60);
     document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
-}, 1000);
+    }, 1000);
+}
 
 
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
 
 const displayCard = (event) => {
     if (event.target.tagName == "LI" && count < 2) {
@@ -166,13 +164,15 @@ const matchCard = () => {
 
 const winGame = () => {
     if (matchedCards.length === cardsArray.length) {
-        const winningMessage = "<div class='winning-message'>" +
-            "<h1>Congratulations! You won!</h1>" +
-            "<h2>It took " + document.getElementById('minutes').innerHTML +
-            " minutes " + document.getElementById('seconds').innerHTML +
-            " seconds" + " with " + moveCount + " moves and " +
-             document.querySelectorAll('.fa-star').length +
-            " stars" + "</h2></div>";
+        const winningMessage =
+            `<div class='winning-message'>
+                <h1>Congratulations! You won!</h1>
+                <h2>It took ${document.getElementById('minutes').innerHTML}
+                minutes ${document.getElementById('seconds').innerHTML}
+                seconds with ${moveCount} moves and
+                ${document.querySelectorAll('.fa-star').length} stars</h2>
+                <button onclick='newCardsSet()'>RESET</button>
+            </div>`;
         deck.innerHTML = winningMessage;
     }
 }
@@ -194,6 +194,7 @@ deck.addEventListener('click', function(event) {
     event.preventDefault();
     console.log('you clicked ' + event.target.tagName);
     displayCard(event);
+    !isTimerActive && startTimer();
 });
 
 restart.addEventListener('click', newCardsSet);
