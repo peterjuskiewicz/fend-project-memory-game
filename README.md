@@ -7,14 +7,16 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The timer starts once the first card is clicked.
+There are 3 stars and depending on number of moves the stars rating will change.
+To win the game the user have to match all the cards.
 
-To get started, open `js/app.js` and start building out the app's functionality
+## Code Dependencies
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+The app is built with the following code dependencies:
 
-## Contributing
+1. Google fonts
+2. Font awsome
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
