@@ -120,14 +120,16 @@ function startTimer() {
 
 
 
-
 const displayCard = (event) => {
     if (event.target.tagName == "LI" && count < 2) {
-        event.target.setAttribute('class', 'card open show');
-        count++;
-        moveCount++;
+
+        if(event.target.getAttribute('class') != 'card open show'){
+            event.target.setAttribute('class', 'card open show');
+            tempArray.push(event.target);
+            count++;
+            moveCount++;
+        }
         removeStar();
-        tempArray.push(event.target);
         matchCard();
         if(tempArray.length == 2){
             hideCard(event);
