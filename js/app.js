@@ -66,6 +66,9 @@ const newCardsSet = () => {
     stars.innerHTML = "";
 
     sec = 0;
+    clearInterval(intervalID);
+    document.getElementById("seconds").innerHTML= "";
+    document.getElementById("minutes").innerHTML= "";
 
     for (let i = 0; i < cardsArray.length; i++) {
         deck.innerHTML += cardsArray[i];
@@ -80,7 +83,21 @@ const newCardsSet = () => {
 }
 
 
+function playAgain() {
+    newCardsSet();
+    isTimerActive = false;
+    deck.addEventListener('click', () => {deck.addEventListener('click', listener);});
+}
 
+
+
+function listener(event) {
+    event.preventDefault();
+    console.log('you clicked ' + event.target.tagName);
+    displayCard(event);
+    !isTimerActive && console.log('start timer');
+    !isTimerActive && startTimer();
+}
 
 
 
@@ -167,8 +184,11 @@ const matchCard = () => {
 }
 
 const winGame = () => {
-    if (matchedCards.length === cardsArray.length) {
+    // if (matchedCards.length === cardsArray.length) {
+        if(matchedCards.length === 2) {
         clearInterval(intervalID);
+        deck.removeEventListener('click', listener);
+        matchedCards = [];
         const winningMessage =
             `<div class='winning-message'>
                 <h1>Congratulations! You won!</h1>
@@ -176,7 +196,7 @@ const winGame = () => {
                 minutes ${document.getElementById('seconds').innerHTML}
                 seconds with ${moveCount} moves and
                 ${document.querySelectorAll('.fa-star').length} stars</h2>
-                <button onclick='newCardsSet()'>New Game</button>
+                <button onclick='playAgain()'>New Game</button>
             </div>`;
         deck.innerHTML = winningMessage;
     }
@@ -195,13 +215,11 @@ const removeStar = () => {
 
 
 
-deck.addEventListener('click', function(event) {
-    event.preventDefault();
-    console.log('you clicked ' + event.target.tagName);
-    displayCard(event);
-    !isTimerActive && startTimer();
-});
+deck.addEventListener('click', listener);
 
-restart.addEventListener('click', newCardsSet);
+restart.addEventListener('click', function() {
+    newCardsSet();
+    isTimerActive = false;
+});
 
 document.addEventListener('DOMContentLoaded', newCardsSet);
