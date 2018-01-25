@@ -184,8 +184,8 @@ const matchCard = () => {
 }
 
 const winGame = () => {
-    // if (matchedCards.length === cardsArray.length) {
-        if(matchedCards.length === 2) {
+    if (matchedCards.length === cardsArray.length) {
+
         clearInterval(intervalID);
         deck.removeEventListener('click', listener);
         matchedCards = [];
